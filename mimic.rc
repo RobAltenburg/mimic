@@ -1,0 +1,77 @@
+#define IDM_EXIT 1001
+#define IDM_QUERY 1002
+#define IDM_CLEAR 1003
+#define IDM_STEALTH 1004
+#define IDM_ABOUT 1411
+
+#define IDOK          1
+#define IDEXIT        1001
+#define IDCANCEL	    2
+#define IDI_ICON      1014
+#define IDI_ALERT     1015
+
+#define DLI_WRITE	    2001
+#define DLI_NICK	    2002
+
+#define WS_VISIBLE    0x10000000L
+#define WS_CAPTION    0xC00000L
+#define WS_CHILD	    0x40000000
+#define WS_POPUP	    0x80000000
+#define WS_BORDER	    0x800000
+#define DS_MODALFRAME 0x80L
+#define DS_3DLOOK	    0x4
+
+IDI_ICON ICON mimic.ico
+IDI_ALERT ICON mimicalert.ico
+
+MailslotMenu MENU
+{
+ POPUP "&File"
+	{
+	MENUITEM SEPARATOR
+	MENUITEM "E&xit",IDM_EXIT
+	}
+ POPUP "&Tools"
+	{
+	MENUITEM "Clear Screen",IDM_CLEAR
+	MENUITEM "Stealth Mode",IDM_STEALTH
+	MENUITEM "Options",IDM_QUERY
+	}    
+  POPUP "&Help"
+      {
+	MENUITEM "&About",	IDM_ABOUT
+      }
+}
+
+
+IDD_ABOUT DIALOG  0, 0, 160, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION  | WS_VISIBLE  | DS_3DLOOK
+CAPTION "About Mimic"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDI_ICON,-1,4,8,21,20 
+    CTEXT           "Mimic version 1",-1,25,8,100,8
+    CTEXT           "(c) 2006  Robert Altenburg",-1,25,18,100,8
+    LTEXT           "Licensed under the GNU General Public License \
+    Version 2 or later. This is free software and you are welcome to \
+    redistribute it under certain conditions.",-1,5,30,153,32
+    DEFPUSHBUTTON   "OK",IDOK,101,75,50,14
+END
+
+
+IDD_QUERY DIALOG 200, 100, 140, 80
+STYLE  WS_POPUP |  DS_MODALFRAME | WS_VISIBLE  | DS_3DLOOK
+CAPTION "Options"
+BEGIN
+    DEFPUSHBUTTON   "Set", IDOK,    50,60,30,13, WS_CHILD
+    DEFPUSHBUTTON   "E&xit", IDM_EXIT, 85,60,30,13, WS_CHILD
+
+    CONTROL 	    "", DLI_WRITE, "EDIT", WS_BORDER, 45, 10, 80, 12 
+    CONTROL 	    "Recipient:", -1, "static", WS_CHILD , 5, 10, 35, 12 
+   
+    CONTROL 	    "", DLI_NICK, "EDIT", WS_BORDER, 45, 25, 80, 12 
+    CONTROL 	    "Nick:", -1, "static", WS_CHILD , 5, 25, 30, 12
+
+ 
+END
+
